@@ -1,0 +1,18 @@
+{
+  "foo": "bar",
+  "bar": "foo",
+  "hello": {
+    "world": "Hello World"
+  },
+  "Astronauts": [
+    "Neil Armstrong",
+    "Buzz Aldrin",
+    "Alan Shepard"
+  ],
+  "website": "http://google.com",
+  "cheeses": {
+    "danish": "Havarti",
+    "hard": ["Parmesan"],
+    "soft": ["Brie", "Chevre", "(soft.camembert)", "soft.brie"]
+  }
+}
