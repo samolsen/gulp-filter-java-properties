@@ -36,7 +36,7 @@ Absolute path to a .properties file. For relative paths, using `path.resolve` is
 
 #### options.delimiters
 Type: `String`  
-Default: `["${*}", "@"]
+Default: `["${*}", "@"]`
 
 Delimiters to use for string filtering. (More info)[https://github.com/samolsen/node-filter-java-properties/blob/master/docs/javascript-api.md#filter-delimiters].
 
