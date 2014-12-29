@@ -34,7 +34,7 @@ describe("gulp-filter-java-properties", function () {
 
 		var stream;
 		beforeEach(function () {
-			stream = filterJavaProperties({propertiesPath: path.resolve(__dirname, "fixtures/configure.properties")});
+			stream = filterJavaProperties({propertiesPath: "test/fixtures/configure.properties"});
 		});
 
 		it("should produce expected file via buffer", function (done) {
@@ -108,7 +108,7 @@ describe("gulp-filter-java-properties", function () {
 		var stream;
 		beforeEach(function () {
 			stream = filterJavaProperties({
-				propertiesPath: path.resolve(__dirname, "fixtures/configure.properties"),
+				propertiesPath: "test/fixtures/configure.properties",
 				delimiters: '(*)'
 			});
 		});

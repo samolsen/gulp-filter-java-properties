@@ -32,7 +32,7 @@ gulp.src("./src/*.ext")
 Type: `String`  
 *Required*
 
-Absolute path to a .properties file. For relative paths, using `path.resolve` is recommended.
+Path to a **.properties** file. Path should be absolute, or relative to `process.cwd()`.
 
 #### options.delimiters
 Type: `String`  
