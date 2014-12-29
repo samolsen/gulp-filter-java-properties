@@ -51,24 +51,17 @@ module.exports = function (opts) {
 
 				// Handle stream
 				if (file.isStream()) {
-					var inStream = through(),
-						outStream = through();
+					var outStream = through();
 
 					filter.filterStream({
-						inStream: inStream,
+						inStream: file.contents,
 						outStream: outStream,
 						done: function (err) {
-							if (err) {
-								_this.emit(err);
-								return callback();
-							}
-
-							_this.push(file);
+							err ? _this.emit(err) : _this.push(file);
 							return callback();
 						}
 					});
 
-					file.contents.pipe(inStream);			
 					file.contents = outStream;
 					return;	
 				}	
