@@ -14,10 +14,10 @@ npm install --save-dev gulp-filter-java-properties
 Then, add it to your `gulpfile.js`:
 
 ```javascript
-var filter-java-properties = require("gulp-filter-java-properties");
+var filterProperties = require("gulp-filter-java-properties");
 
 gulp.src("./src/*.ext")
-	.pipe(filter-java-properties({
+	.pipe(filterProperties({
       propertiesPath: path.resolve(__dirname, "configure.properties"),
       delimiters: ["${*}", "@"] // optional, defaults shown
 	}))
