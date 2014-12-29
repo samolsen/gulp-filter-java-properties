@@ -5,6 +5,8 @@
 
 > filter-java-properties plugin for [gulp](https://github.com/wearefractal/gulp)
 
+Gulp wrapper for the [filter-java-properties](https://github.com/samolsen/node-filter-java-properties) plugin. Performs key-value string replacement, similar to the Maven Resources plugin.
+
 ## Usage
 
 First, install `gulp-filter-java-properties` as a development dependency:
@@ -20,7 +22,8 @@ var filter-java-properties = require("gulp-filter-java-properties");
 
 gulp.src("./src/*.ext")
 	.pipe(filter-java-properties({
-		msg: "Hello Gulp!"
+		propertiesPath: path.resolve(__dirname, "configure.properties"),
+    delimiters: ["${*}", "@"] // optional, defaults shown
 	}))
 	.pipe(gulp.dest("./dist"));
 ```
@@ -29,11 +32,18 @@ gulp.src("./src/*.ext")
 
 ### filter-java-properties(options)
 
-#### options.msg
+#### options.propertiesPath
 Type: `String`  
-Default: `Hello World`
+*Required*
 
-The message you wish to attach to file.
+Absolute path to a .properties file. For relative paths, using `path.resolve` is recommended.
+
+#### options.delimiters
+Type: `String`  
+Default: `["${*}", "@"]
+
+Delimiters to use for string filtering. (More info)[https://github.com/samolsen/node-filter-java-properties/blob/master/docs/javascript-api.md#filter-delimiters].
+
 
 
 ## License
