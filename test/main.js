@@ -3,7 +3,8 @@
 
 var fs = require("fs"),
 	es = require("event-stream"),
-	should = require("should");
+	should = require("should"),
+	gutil = require("gulp-util");
 
 require("mocha");
 
@@ -13,6 +14,12 @@ var gutil = require("gulp-util"),
 	filterJavaProperties = require("../");
 
 describe("gulp-filter-java-properties", function () {
+
+	it("should error if propertiesFile option is provided", function () {
+		should(function () {
+			filterJavaProperties({});
+		}).throw()
+	});
 
 	var expectedFile = new gutil.File({
 		path: "test/expected/default-delimiters.json",
