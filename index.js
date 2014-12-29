@@ -1,5 +1,8 @@
 var through = require("through2"),
-	gutil = require("gulp-util");
+	gutil = require("gulp-util"),
+	fs = require("fs");
+
+var PropertyFilter = require('filter-java-properties').PropertyFilter;
 
 module.exports = function (opts) {
 	"use strict";
@@ -8,7 +11,7 @@ module.exports = function (opts) {
 	if (!opts) {
 		throw new gutil.PluginError("gulp-filter-java-properties", "No opts supplied");
 	}
-	if (!opts.propertiesFile) {
+	if (!opts.propertiesPath) {
 		throw new gutil.PluginError("gulp-filter-java-properties", "A .properties file is required");	
 	}
 
@@ -23,29 +26,57 @@ module.exports = function (opts) {
 			return callback();
 		}
 
-		if (file.isStream()) {
+		var _this = this;
 
-			// http://nodejs.org/api/stream.html
-			// http://nodejs.org/api/child_process.html
-			// https://github.com/dominictarr/event-stream
+		var propertiesFileStream = fs.createReadStream(opts.propertiesPath);
 
-			// accepting streams is optional
-			this.emit("error",
-				new gutil.PluginError("gulp-filter-java-properties", "Stream content is not supported"));
-			return callback();
-		}
+		PropertyFilter.withStream({
+			inStream: propertiesFileStream,
+			delimiters: opts.delimiters,
+			done: function (err, filter) {
+				if (err) {
+					_this.emit(err);
+					return callback();
+				}
 
-		// check if file.contents is a `Buffer`
-		if (file.isBuffer()) {
+				// Handle buffer
+				if (file.isBuffer()) {
+					var contents = String(file.contents),
+						filtered = filter.filterString(contents);
+					file.contents = new Buffer(filtered);
+					
+					_this.push(file);
+					return callback();
+				}
 
-			// manipulate buffer in some way
-			// http://nodejs.org/api/buffer.html
-			file.contents = new Buffer(String(file.contents) + "\n" + opts);
+				// Handle stream
+				if (file.isStream()) {
+					var inStream = through(),
+						outStream = through();
 
-			this.push(file);
+					filter.filterStream({
+						inStream: inStream,
+						outStream: outStream,
+						done: function (err) {
+							if (err) {
+								_this.emit(err);
+								return callback();
+							}
 
-		}
-		return callback();
+							_this.push(file);
+							return callback();
+						}
+					});
+
+					file.contents.pipe(inStream);			
+					file.contents = outStream;
+					return;	
+				}	
+
+				return callback();
+			}
+		});
+		
 	}
 
 	return through.obj(filterJavaProperties);
