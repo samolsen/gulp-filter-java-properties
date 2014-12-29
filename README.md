@@ -1,9 +1,7 @@
 # gulp-filter-java-properties
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url]
 
-> filter-java-properties plugin for [gulp](https://github.com/wearefractal/gulp)
-
-Gulp wrapper for the [filter-java-properties](https://github.com/samolsen/node-filter-java-properties) plugin. Performs key-value string replacement, similar to the Maven Resources plugin.
+> [gulp](https://github.com/wearefractal/gulp) wrapper for the [filter-java-properties](https://github.com/samolsen/node-filter-java-properties) plugin. Performs key-value string replacement, similar to the Maven Resources plugin.
 
 ## Usage
 
