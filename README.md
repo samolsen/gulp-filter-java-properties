@@ -18,7 +18,7 @@ var filterProperties = require("gulp-filter-java-properties");
 
 gulp.src("./src/*.ext")
 	.pipe(filterProperties({
-      propertiesPath: path.resolve(__dirname, "configure.properties"),
+      propertiesPath: "configure.properties",
       delimiters: ["${*}", "@"] // optional, defaults shown
 	}))
 	.pipe(gulp.dest("./dist"));
