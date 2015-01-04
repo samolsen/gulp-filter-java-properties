@@ -1,6 +1,6 @@
 {
   "name": "gulp-filter-java-properties",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Gulp wrapper for the filter-java-properties Node pacakge",
   "keywords": [
     "gulpplugin",
@@ -22,7 +22,7 @@
     "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "dependencies": {
-    "filter-java-properties": "^0.2.0",
+    "filter-java-properties": "^0.3.0",
     "gulp-util": "~3.0.1",
     "through2": "~0.6.3"
   },
